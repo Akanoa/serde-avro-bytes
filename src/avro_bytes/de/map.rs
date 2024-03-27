@@ -74,7 +74,7 @@ impl<'de> Visitor<'de> for VisitorPair {
 }
 
 #[allow(unused)]
-pub fn deserialize_hash_map<'de, D>(deserializer: D) -> Result<HashMap<Vec<u8>, Vec<u8>>, D::Error>
+pub fn deserialize_hashmap<'de, D>(deserializer: D) -> Result<HashMap<Vec<u8>, Vec<u8>>, D::Error>
 where
     D: Deserializer<'de>,
 {
@@ -106,9 +106,7 @@ impl<'de> Visitor<'de> for HashMapVisitor {
 }
 
 #[allow(unused)]
-pub fn deserialize_btree_map<'de, D>(
-    deserializer: D,
-) -> Result<BTreeMap<Vec<u8>, Vec<u8>>, D::Error>
+pub fn deserialize_btreemap<'de, D>(deserializer: D) -> Result<BTreeMap<Vec<u8>, Vec<u8>>, D::Error>
 where
     D: Deserializer<'de>,
 {
@@ -140,7 +138,7 @@ impl<'de> Visitor<'de> for BtreeMapVisitor {
 }
 
 #[allow(unused)]
-pub fn deserialize_option_hash_map<'de, D>(
+pub fn deserialize_option_hashmap<'de, D>(
     deserializer: D,
 ) -> Result<Option<HashMap<Vec<u8>, Vec<u8>>>, D::Error>
 where
@@ -151,7 +149,7 @@ where
 }
 
 #[allow(unused)]
-pub fn deserialize_option_btree_map<'de, D>(
+pub fn deserialize_option_btreemap<'de, D>(
     deserializer: D,
 ) -> Result<Option<BTreeMap<Vec<u8>, Vec<u8>>>, D::Error>
 where
@@ -181,7 +179,7 @@ impl<'de> Visitor<'de> for OptionHashMapVisitor {
     where
         D: Deserializer<'de>,
     {
-        Ok(Some(deserialize_hash_map(deserializer)?))
+        Ok(Some(deserialize_hashmap(deserializer)?))
     }
 }
 
@@ -205,6 +203,6 @@ impl<'de> Visitor<'de> for OptionBtreeMapVisitor {
     where
         D: Deserializer<'de>,
     {
-        Ok(Some(deserialize_btree_map(deserializer)?))
+        Ok(Some(deserialize_btreemap(deserializer)?))
     }
 }

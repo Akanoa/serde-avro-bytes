@@ -81,36 +81,18 @@ static SCHEMA: &str = r#"
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 struct Record {
-    #[serde(
-    serialize_with = "avro_bytes::serialize",
-    deserialize_with = "avro_bytes::deserialize_bytes"
-    )]
+    #[serde(with = "avro_bytes::bytes")]
     key: Vec<u8>,
-    #[serde(
-    serialize_with = "avro_bytes::serialize",
-    deserialize_with = "avro_bytes::deserialize_option_bytes"
-    )]
+    #[serde(with = "avro_bytes::bytes::option")]
     key2: Option<Vec<u8>>,
-    #[serde(
-    serialize_with = "avro_bytes::serialize",
-    deserialize_with = "avro_bytes::deserialize_hash_map"
-    )]
+    #[serde(with = "avro_bytes::hashmap")]
     key3: HashMap<Vec<u8>, Vec<u8>>,
-    #[serde(
-    serialize_with = "avro_bytes::serialize",
-    deserialize_with = "avro_bytes::deserialize_option_btree_map"
-    )]
+    #[serde(with = "avro_bytes::btreemap::option")]
     key4: Option<BTreeMap<Vec<u8>, Vec<u8>>>,
-    #[serde(
-    serialize_with = "avro_bytes::serialize",
-    deserialize_with = "avro_bytes::deserialize_list"
-    )]
+    #[serde(with = "avro_bytes::list")]
     key5: Vec<Vec<u8>>,
-    #[serde(
-    serialize_with = "avro_bytes::serialize",
-    deserialize_with = "avro_bytes::deserialize_option_list"
-    )]
-    key6: Option<Vec<Vec<u8>>>
+    #[serde(with = "avro_bytes::list::option")]
+    key6: Option<Vec<Vec<u8>>>,
 }
 
 fn main() {
