@@ -1,0 +1,15 @@
+invalid schema type for Record:
+    Union(
+        UnionSchema {
+            schemas: [
+                Record(
+                    RecordSchema {
+                    name: Name { name: "Pair", namespace: None },
+                    aliases: None, doc: None, fields: [
+                        RecordField { name: "key", doc: None, aliases: None, default: None, schema: Bytes, order: Ascending, position: 0, custom_attributes: {} },
+                        RecordField { name: "value", doc: None, aliases: None, default: None, schema: Bytes, order: Ascending, position: 1, custom_attributes: {} }
+                    ],
+                    lookup: {"key": 0, "value": 1}, attributes: {}
+                })],
+                variant_index: {}
+           })

@@ -1,0 +1,73 @@
+{
+  "name": "Record",
+  "type": "record",
+  "fields": [
+    {
+      "type": "bytes",
+      "name": "key"
+    },
+    {
+      "type": [
+        "null",
+        "bytes"
+      ],
+      "name": "key2"
+    },
+    {
+      "type": "array",
+      "items": {
+        "type": "record",
+        "name": "Pair1",
+        "fields": [
+          {
+            "name": "key",
+            "type": "bytes"
+          },
+          {
+            "name": "value",
+            "type": "bytes"
+          }
+        ]
+      },
+      "name": "key3"
+    },
+    {
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "type": "record",
+            "name": "Pair",
+            "fields": [
+              {
+                "name": "key",
+                "type": "bytes"
+              },
+              {
+                "name": "value",
+                "type": "bytes"
+              }
+            ]
+          }
+        }
+      ],
+      "name": "key4"
+    },
+    {
+      "type": "array",
+      "items": "bytes",
+      "name": "key5"
+    },
+    {
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "bytes"
+        }
+      ],
+      "name": "key6"
+    }
+  ]
+}
