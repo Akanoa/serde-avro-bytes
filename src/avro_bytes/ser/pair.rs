@@ -1,6 +1,6 @@
-use serde::{Serialize, Serializer};
-use serde::ser::SerializeStruct;
 use crate::avro_bytes::ser::bytes::Bytes;
+use serde::ser::SerializeStruct;
+use serde::{Serialize, Serializer};
 
 #[derive(Debug)]
 pub(crate) struct Pair<'a> {
@@ -10,8 +10,8 @@ pub(crate) struct Pair<'a> {
 
 impl Serialize for Pair<'_> {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-        where
-            S: Serializer,
+    where
+        S: Serializer,
     {
         let mut pair = serializer.serialize_struct("Pair", 2)?;
         pair.serialize_field("key", &Bytes(self.key))?;

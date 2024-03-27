@@ -1,7 +1,8 @@
+use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashMap};
 use std::io::Cursor;
 
-use serde::{Deserialize, Serialize};
+mod avro_bytes;
 
 static SCHEMA: &str = r#"
 {
@@ -131,5 +132,3 @@ fn main() {
 
     assert_eq!(result, record);
 }
-
-mod avro_bytes;

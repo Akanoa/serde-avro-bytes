@@ -1,6 +1,6 @@
-use serde::Serializer;
-use serde::ser::SerializeSeq;
 use crate::avro_bytes::ser::bytes::Bytes;
+use serde::ser::SerializeSeq;
+use serde::Serializer;
 
 pub fn serialize_list_bytes<S>(v: &Vec<Vec<u8>>, serializer: S) -> Result<S::Ok, S::Error>
 where

@@ -1,7 +1,7 @@
-use std::collections::{BTreeMap, HashMap};
-use serde::Serializer;
-use serde::ser::SerializeSeq;
 use crate::avro_bytes::ser::pair::Pair;
+use serde::ser::SerializeSeq;
+use serde::Serializer;
+use std::collections::{BTreeMap, HashMap};
 
 pub fn serialize_hashmap<S>(v: &HashMap<Vec<u8>, Vec<u8>>, serializer: S) -> Result<S::Ok, S::Error>
 where
