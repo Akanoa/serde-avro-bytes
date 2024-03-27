@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashMap};
 use std::io::Cursor;
 
-mod avro_bytes;
+use playground_avro as avro_bytes;
 
 static SCHEMA: &str = r#"
 {
