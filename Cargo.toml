@@ -1,12 +1,16 @@
 [package]
-name = "playground-avro"
+name = "serde-avro-bytes"
 version = "0.1.0"
 edition = "2021"
+
+license = "MIT OR Apache-2.0"
+description = "Efficiently store Rust idiomatic bytes related types in Avro encoding."
+repository = "https://github.com/Akanoa/serde-avro-bytes"
+readme = "Readme.md"
+keywords = ["avro", "serde", "bytes"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 apache-avro = "0.16.0"
 serde = "1.0.197"
-env_logger = "0.11.3"
-bytes = "1.6.0"

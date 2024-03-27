@@ -97,7 +97,6 @@ struct Record {
 }
 
 fn main() {
-    env_logger::init();
 
     let map = BTreeMap::from([
         (vec![1, 5, 6], vec![7, 8, 9]),
