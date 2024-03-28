@@ -28,18 +28,21 @@ encode its component as "bytes".
 ```rust
 #[derive(Serialize, Deserialize)]
 struct Record {
-    #[serde(with = "avro_bytes::bytes")]
+    #[serde(with = "serde_avro_bytes::bytes")]
     key: Vec<u8>,
-    #[serde(with = "avro_bytes::bytes::option")]
+    #[serde(with = "serde_avro_bytes::bytes::option")]
     key2: Option<Vec<u8>>,
-    #[serde(with = "avro_bytes::hashmap")]
+    #[serde(with = "serde_avro_bytes::hashmap")]
     key3: HashMap<Vec<u8>, Vec<u8>>,
-    #[serde(with = "avro_bytes::btreemap::option")]
+    #[serde(with = "serde_avro_bytes::btreemap::option")]
     key4: Option<BTreeMap<Vec<u8>, Vec<u8>>>,
-    #[serde(with = "avro_bytes::list")]
+    #[serde(with = "serde_avro_bytes::list")]
     key5: Vec<Vec<u8>>,
-    #[serde(with = "avro_bytes::list::option")]
+    #[serde(with = "serde_avro_bytes::list::option")]
     key6: Option<Vec<Vec<u8>>>,
 }
 ```
 
+## Features
+
+* `bstr`: adds support for working with `BString`s which are convenient wrappers for partially valid UTF-8 bytes sequences provided by the [`bst`](https://github.com/BurntSushi/bstr) crate. See [`examples/bstr.rs`](./examples/bstr.rs).

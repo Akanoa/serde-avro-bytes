@@ -2,102 +2,84 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashMap};
 use std::io::Cursor;
 
-use playground_avro as avro_bytes;
-
-static SCHEMA: &str = r#"
-{
+static SCHEMA: &str = r#"{
   "name": "Record",
   "type": "record",
   "fields": [
-    {
-      "type": "bytes",
-      "name": "key"
-    },
-    {
-      "type": [
-        "null",
-        "bytes"
-      ],
-      "name": "key2"
-    },
-    {
-      "type": "array",
-      "items": {
-        "type": "record",
-        "name": "Pair1",
-        "fields": [
-          {
-            "name": "key",
-            "type": "bytes"
-          },
-          {
-            "name": "value",
-            "type": "bytes"
-          }
-        ]
+      {
+          "type": "bytes",
+          "name": "key"
       },
-      "name": "key3"
-    },
-    {
-      "type": [
-        "null",
-        {
+      {
+          "type": [
+              "null",
+              "bytes"
+          ],
+          "name": "key2"
+      },
+      {
           "type": "array",
           "items": {
-            "type": "record",
-            "name": "Pair",
-            "fields": [
+              "type": "record",
+              "name": "Pair",
+              "fields": [
+                  {
+                      "name": "key",
+                      "type": "bytes"
+                  },
+                  {
+                      "name": "value",
+                      "type": "bytes"
+                  }
+              ]
+          },
+          "name": "key3"
+      },
+      {
+          "type": [
+              "null",
               {
-                "name": "key",
-                "type": "bytes"
-              },
-              {
-                "name": "value",
-                "type": "bytes"
+                  "type": "array",
+                  "items": "Pair"
               }
-            ]
-          }
-        }
-      ],
-      "name": "key4"
-    },
-    {
-      "type": "array",
-      "items": "bytes",
-      "name": "key5"
-    },
-    {
-      "type": [
-        "null",
-        {
+          ],
+          "name": "key4"
+      },
+      {
           "type": "array",
-          "items": "bytes"
-        }
-      ],
-      "name": "key6"
-    }
+          "items": "bytes",
+          "name": "key5"
+      },
+      {
+          "type": [
+              "null",
+              {
+                  "type": "array",
+                  "items": "bytes"
+              }
+          ],
+          "name": "key6"
+      }
   ]
-}
-"#;
+}"#;
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 struct Record {
-    #[serde(with = "avro_bytes::bytes")]
+    #[serde(with = "serde_avro_bytes::bytes")]
     key: Vec<u8>,
-    #[serde(with = "avro_bytes::bytes::option")]
+    #[serde(with = "serde_avro_bytes::bytes::option")]
     key2: Option<Vec<u8>>,
-    #[serde(with = "avro_bytes::hashmap")]
+    #[serde(with = "serde_avro_bytes::hashmap")]
     key3: HashMap<Vec<u8>, Vec<u8>>,
-    #[serde(with = "avro_bytes::btreemap::option")]
+    #[serde(with = "serde_avro_bytes::btreemap::option")]
     key4: Option<BTreeMap<Vec<u8>, Vec<u8>>>,
-    #[serde(with = "avro_bytes::list")]
+    #[serde(with = "serde_avro_bytes::list")]
     key5: Vec<Vec<u8>>,
-    #[serde(with = "avro_bytes::list::option")]
+    #[serde(with = "serde_avro_bytes::list::option")]
     key6: Option<Vec<Vec<u8>>>,
 }
 
 fn main() {
-
     let map = BTreeMap::from([
         (vec![1, 5, 6], vec![7, 8, 9]),
         (vec![10, 11, 12], vec![13, 1, 48]),

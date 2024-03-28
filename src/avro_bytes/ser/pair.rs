@@ -4,8 +4,8 @@ use serde::{Serialize, Serializer};
 
 #[derive(Debug)]
 pub(crate) struct Pair<'a> {
-    pub(crate) key: &'a Vec<u8>,
-    pub(crate) value: &'a Vec<u8>,
+    pub(crate) key: &'a [u8],
+    pub(crate) value: &'a [u8],
 }
 
 impl Serialize for Pair<'_> {

@@ -1,13 +1,19 @@
+use std::{
+    collections::{BTreeMap, HashMap},
+    fmt::Formatter,
+};
+
+use serde::{
+    de::{Error, IgnoredAny, MapAccess, SeqAccess, Visitor},
+    Deserialize, Deserializer,
+};
+
 use crate::avro_bytes::de::bytes::BytesVisitor;
-use serde::de::{Error, IgnoredAny, MapAccess, SeqAccess, Visitor};
-use serde::{Deserialize, Deserializer};
-use std::collections::{BTreeMap, HashMap};
-use std::fmt::Formatter;
 
 #[derive(Debug)]
-struct Pair {
-    key: Bytes,
-    value: Bytes,
+pub(crate) struct Pair {
+    pub(crate) key: Bytes,
+    pub(crate) value: Bytes,
 }
 
 #[derive(Debug)]
@@ -57,18 +63,12 @@ impl<'de> Visitor<'de> for VisitorPair {
                 }
             }
         }
-
-        let key = if let Some(x) = key {
-            x
-        } else {
+        let Some(key) = key else {
             return Err(Error::missing_field("key"));
         };
-        let value = if let Some(x) = value {
-            x
-        } else {
+        let Some(value) = value else {
             return Err(Error::missing_field("value"));
         };
-
         Ok(Pair { key, value })
     }
 }
