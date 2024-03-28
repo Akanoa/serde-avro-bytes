@@ -63,18 +63,12 @@ impl<'de> Visitor<'de> for VisitorPair {
                 }
             }
         }
-
-        let key = if let Some(x) = key {
-            x
-        } else {
+        let Some(key) = key else {
             return Err(Error::missing_field("key"));
         };
-        let value = if let Some(x) = value {
-            x
-        } else {
+        let Some(value) = value else {
             return Err(Error::missing_field("value"));
         };
-
         Ok(Pair { key, value })
     }
 }

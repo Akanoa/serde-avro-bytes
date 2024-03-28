@@ -8,7 +8,7 @@ pub fn serialize_list_bytes<S: Serializer, T: AsRef<[u8]>>(
 ) -> Result<S::Ok, S::Error> {
     let mut seq = serializer.serialize_seq(Some(v.len()))?;
     for x in v {
-        seq.serialize_element(&Bytes(x.as_ref()))?
+        seq.serialize_element(&Bytes(x.as_ref()))?;
     }
     seq.end()
 }
