@@ -43,3 +43,6 @@ struct Record {
 }
 ```
 
+## Features
+
+* `bstr`: adds support for working with `BString`s which are convenient wrappers for partially valid UTF-8 bytes sequences provided by the [`bst`](https://github.com/BurntSushi/bstr) crate. See [`examples/bstr.rs`](./examples/bstr.rs).
