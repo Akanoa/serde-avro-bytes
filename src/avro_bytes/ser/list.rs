@@ -1,33 +1,26 @@
-use crate::avro_bytes::ser::bytes::Bytes;
-use serde::ser::SerializeSeq;
-use serde::Serializer;
+use serde::{ser::SerializeSeq, Serializer};
 
-pub fn serialize_list_bytes<S>(v: &Vec<Vec<u8>>, serializer: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
+use crate::avro_bytes::ser::bytes::Bytes;
+
+pub fn serialize_list_bytes<S: Serializer, T: AsRef<[u8]>>(
+    v: &[T],
+    serializer: S,
+) -> Result<S::Ok, S::Error> {
     let mut seq = serializer.serialize_seq(Some(v.len()))?;
     for x in v {
-        seq.serialize_element(&Bytes(x))?
+        seq.serialize_element(&Bytes(x.as_ref()))?
     }
     seq.end()
 }
 
-pub fn serialize_option_list_bytes<S>(
-    v: &Option<Vec<Vec<u8>>>,
+pub fn serialize_option_list_bytes<S: Serializer, T: AsRef<[u8]>>(
+    v: &Option<Vec<T>>,
     serializer: S,
-) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
+) -> Result<S::Ok, S::Error> {
     match v {
         None => serializer.serialize_none(),
         Some(v) => {
-            let list = v.iter().fold(vec![], |mut acc, x| {
-                acc.push(Bytes(x));
-                acc
-            });
-            serializer.serialize_some(&list)
+            serializer.serialize_some(&v.iter().map(AsRef::as_ref).map(Bytes).collect::<Vec<_>>())
         }
     }
 }

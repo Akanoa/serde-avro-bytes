@@ -59,6 +59,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "bstr"
+version = "1.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "05efc5cfd9110c8416e471df0e96702d58690178e206e61b7173706673c93706"
+dependencies = [
+ "memchr",
+ "regex-automata",
+ "serde",
+]
+
+[[package]]
 name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -294,6 +305,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "regex-automata"
+version = "0.4.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "86b83b8b9847f9bf95ef68afb0b8e6cdb80f498442f5179a29fad448fcc1eaea"
+
+[[package]]
 name = "regex-lite"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -331,6 +348,7 @@ name = "serde-avro-bytes"
 version = "0.1.0"
 dependencies = [
  "apache-avro",
+ "bstr",
  "serde",
 ]
 

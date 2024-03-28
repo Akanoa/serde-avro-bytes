@@ -1,13 +1,19 @@
+use std::{
+    collections::{BTreeMap, HashMap},
+    fmt::Formatter,
+};
+
+use serde::{
+    de::{Error, IgnoredAny, MapAccess, SeqAccess, Visitor},
+    Deserialize, Deserializer,
+};
+
 use crate::avro_bytes::de::bytes::BytesVisitor;
-use serde::de::{Error, IgnoredAny, MapAccess, SeqAccess, Visitor};
-use serde::{Deserialize, Deserializer};
-use std::collections::{BTreeMap, HashMap};
-use std::fmt::Formatter;
 
 #[derive(Debug)]
-struct Pair {
-    key: Bytes,
-    value: Bytes,
+pub(crate) struct Pair {
+    pub(crate) key: Bytes,
+    pub(crate) value: Bytes,
 }
 
 #[derive(Debug)]

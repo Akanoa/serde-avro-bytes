@@ -11,6 +11,16 @@ keywords = ["avro", "serde", "bytes"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[example]]
+name = "bstr"
+path = "examples/bstr.rs"
+required-features = ["bstr"]
+
+[features]
+default = []
+bstr = ["dep:bstr"]
+
 [dependencies]
 apache-avro = "0.16.0"
 serde = "1.0.197"
+bstr = { version = "1.9.1", optional = true }
